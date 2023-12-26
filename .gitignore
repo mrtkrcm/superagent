@@ -6,7 +6,7 @@ superenv/
 .DS_Store
 venv/
 /.vscode
-/.codesandbox
+# /.codesandbox
 
 ## GUI IGNORE
 
