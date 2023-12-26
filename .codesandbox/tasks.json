@@ -7,7 +7,7 @@
     },
     {
       "name": "ui npm",
-      "command": "cd libs/ui && npm install"
+      "command": "cd libs/ui && npm install && npm run build"
     },
     {
       "name": "superagent poetry install",
@@ -17,20 +17,21 @@
 
   // These tasks can be run from CodeSandbox. Running one will open a log in the app.
   "tasks": {
-    "pwd": {
-      "name": "pwd",
-      "command": "pwd",
-      "runAtStart": true
-    },
     "gunicorn": {
       "name": "gunicorn",
-      "command": "cd libs/superagent && gunicorn --bind :8000 --workers 2 --timeout 0  --worker-class uvicorn.workers.UvicornWorker  --threads 8 app.main:app",
-      "runAtStart": true
+      "command": "cd libs/superagent && poetry run gunicorn --bind :7070 --workers 2 --timeout 0  --worker-class uvicorn.workers.UvicornWorker  --threads 8 app.main:app",
+      "runAtStart": true,
+      "preview": {
+        "port": 7070
+      }
     },
     "startweb": {
-      "name": "startweb",
-      "command": "cd libs/ui && npm i && npm run build && npm run start",
-      "runAtStart": true
+      "name": "npmrunstart",
+      "command": "cd libs/ui && npm run start",
+      "runAtStart": true,
+      "preview": {
+        "port": 8080
+      }
     }
   }
 }
