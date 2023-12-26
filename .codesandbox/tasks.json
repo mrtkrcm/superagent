@@ -1,0 +1,36 @@
+{
+  // These tasks will run in order when initializing your CodeSandbox project.
+  "setupTasks": [
+    {
+      "name": "poetry init",
+      "command": "curl -sSL https://install.python-poetry.org | python3 -"
+    },
+    {
+      "name": "ui npm",
+      "command": "cd libs/ui && npm install"
+    },
+    {
+      "name": "superagent poetry install",
+      "command": "cd libs/superagent && poetry install && poetry run prisma generate"
+    }
+  ],
+
+  // These tasks can be run from CodeSandbox. Running one will open a log in the app.
+  "tasks": {
+    "pwd": {
+      "name": "pwd",
+      "command": "pwd",
+      "runAtStart": true
+    },
+    "gunicorn": {
+      "name": "gunicorn",
+      "command": "cd libs/superagent && gunicorn --bind :8000 --workers 2 --timeout 0  --worker-class uvicorn.workers.UvicornWorker  --threads 8 app.main:app",
+      "runAtStart": true
+    },
+    "startweb": {
+      "name": "startweb",
+      "command": "cd libs/ui && npm i && npm run build && npm run start",
+      "runAtStart": true
+    }
+  }
+}
